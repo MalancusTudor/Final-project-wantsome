@@ -1,0 +1,160 @@
+body {
+    width: 100vh;
+    background: #43c6ac;
+    background: -webkit-linear-gradient(to right, #43c6ac, #f8ffae);
+    background: linear-gradient(to right, #43c6ac, #f8ffae);
+}
+
+header {
+    position: relative;
+	left: 800px;
+	margin: 0;
+}
+
+h3 {
+    font-family:'Roboto',sans-serif;
+	font-size: 40px;
+	margin: 20px;
+}
+
+#fen {
+	font-family:'Roboto',sans-serif;
+    position: relative;
+    left: 500px;
+    font-size: 30px;
+}
+
+#fenInput { 
+	width: 650px;
+    font-size: 20px;
+}
+
+#board {
+	position: relative;
+    top: 20px;
+    left: 500px;
+    width: 720px;
+    height: 720px;
+    border: solid 2px #000000;
+}
+
+#engineOutput {
+	position: absolute;
+    left: 1300px;
+    top: 300px;
+    font-family:'Roboto',sans-serif;
+    font-size: 25px;
+}
+
+select {
+    font-size: 20px;
+}
+
+button {
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:#43c6ac;
+    text-align:center;
+    transition: all 0.2s;
+    font-size: 20px;
+    width: 160px;
+}
+
+button:hover {
+    background-color:#4095c6;
+}
+
+@media all and (max-width:30em){
+    button {
+        display: block;
+        margin: 0.2em auto;
+    }
+}
+
+.square {
+	position: absolute;
+    width: 90px;
+    height: 90px;
+}
+
+.darkSquare {
+	background-color: #d38d47;
+}
+
+.lightSquare {
+	background-color: #fbce9c;
+}
+
+.squareSelected {
+	background-color: #885a2c;
+}
+
+.rank1 { top: 630px; }
+.rank2 { top: 540px; }
+.rank3 { top: 450px; }
+.rank4 { top: 360px; }
+.rank5 { top: 270px; }
+.rank6 { top: 180px; }
+.rank7 { top: 90px; }
+.rank8 { top: 0px; }
+
+.file1 { left: 0px; }
+.file2 { left: 90px; }
+.file3 { left: 180px; }
+.file4 { left: 270px; }
+.file5 { left: 360px; }
+.file6 { left: 450px; }
+.file7 { left: 540px; }
+.file8 { left: 630px; }
+
+.piece {
+	position: absolute;
+    width: 90px;
+    height: 90px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
