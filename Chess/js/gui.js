@@ -6,8 +6,10 @@ $("#setFen").click(function () {
 $('#takeButton').click( function () {
 	if(gameBoard.hisPly > 0) {
 		takeMove();
+		$("#gameStatus").text("");
 		gameBoard.ply = 0;
 		setInitialBoardPieces();
+		gameController.gameOver = false;
 	}
 });
 
