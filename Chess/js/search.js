@@ -306,13 +306,16 @@ function updateDOMStats(domScore, domDepth) {
 	if(Math.abs(domScore) > mate - maxDepth) {
 		scoreText = "score: Mate In " + (mate - (Math.abs(domScore))-1) + " moves";
 	}
+
+	let square = fromSquare(searchController.best);
+	let piece = gameBoard.pieces[square]
 	
 	$("#orderingOutput").text("Ordering: " + ((searchController.fhf/searchController.fh)*100).toFixed(2) + "%");
 	$("#depthOutput").text("Depth: " + domDepth);
 	$("#scoreOutput").text(scoreText);
 	$("#nodesOutput").text("Nodes: " + searchController.nodes);
 	$("#timeOutput").text("Time: " + (($.now()-searchController.start)/1000).toFixed(1) + "s");
-	$("#bestOutput").text("bestMove: " + printMove(searchController.best));
+	$("#bestOutput").text("Best move: " + pieceChar[piece] + printMove(searchController.best));
 }
 
 

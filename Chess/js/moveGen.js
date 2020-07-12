@@ -33,7 +33,7 @@ function moveExists(move) {
 	return false;
 }
 
-function moveShiftShift(from, to, captured, promoted, flag) {
+function moveShift(from, to, captured, promoted, flag) {
 	return (from | (to << 7) | (captured << 14) | (promoted << 20) | flag);
 }
 
@@ -66,45 +66,45 @@ function addEnPassantMove(move) {
 
 function addWhitePawnCaptureMove(from, to, cap) {
 	if(ranksBoard[from]===ranks.rank7) {
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.wQ, 0));
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.wR, 0));
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.wB, 0));
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.wN, 0));	
+		addCaptureMove(moveShift(from, to, cap, pieces.wQ, 0));
+		addCaptureMove(moveShift(from, to, cap, pieces.wR, 0));
+		addCaptureMove(moveShift(from, to, cap, pieces.wB, 0));
+		addCaptureMove(moveShift(from, to, cap, pieces.wN, 0));	
 	} else {
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.empty, 0));	
+		addCaptureMove(moveShift(from, to, cap, pieces.empty, 0));	
 	}
 }
 
 function addBlackPawnCaptureMove(from, to, cap) {
 	if(ranksBoard[from]===ranks.rank2) {
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.bQ, 0));
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.bR, 0));
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.bB, 0));
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.bN, 0));	
+		addCaptureMove(moveShift(from, to, cap, pieces.bQ, 0));
+		addCaptureMove(moveShift(from, to, cap, pieces.bR, 0));
+		addCaptureMove(moveShift(from, to, cap, pieces.bB, 0));
+		addCaptureMove(moveShift(from, to, cap, pieces.bN, 0));	
 	} else {
-		addCaptureMove(moveShiftShift(from, to, cap, pieces.empty, 0));	
+		addCaptureMove(moveShift(from, to, cap, pieces.empty, 0));	
 	}
 }
 
 function addWhitePawnQuietMove(from, to) {
 	if(ranksBoard[from]===ranks.rank7) {
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.wQ,0));
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.wR,0));
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.wB,0));
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.wN,0));
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.wQ,0));
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.wR,0));
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.wB,0));
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.wN,0));
 	} else {
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.empty,0));	
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.empty,0));	
 	}
 }
 
 function addBlackPawnQuietMove(from, to) {
 	if(ranksBoard[from]===ranks.rank2) {
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.bQ,0));
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.bR,0));
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.bB,0));
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.bN,0));
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.bQ,0));
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.bR,0));
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.bB,0));
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.bN,0));
 	} else {
-		addQuietMove(moveShiftShift(from,to,pieces.empty,pieces.empty,0));	
+		addQuietMove(moveShift(from,to,pieces.empty,pieces.empty,0));	
 	}
 }
 
@@ -127,7 +127,7 @@ function generateMoves() {
 			if(gameBoard.pieces[sq + 10] === pieces.empty) {
 				addWhitePawnQuietMove(sq, sq+10);
 				if(ranksBoard[sq] === ranks.rank2 && gameBoard.pieces[sq + 20] === pieces.empty) {
-					addQuietMove( moveShiftShift(sq, sq + 20, pieces.empty, pieces.empty, moveFlagPawnStart ));
+					addQuietMove( moveShift(sq, sq + 20, pieces.empty, pieces.empty, moveFlagPawnStart ));
 				}
 			}
 			
@@ -141,11 +141,11 @@ function generateMoves() {
 			
 			if(gameBoard.enPas !== squares.noSquare) {
 				if(sq + 9 === gameBoard.enPas) {
-					addEnPassantMove( moveShiftShift(sq, sq+9, pieces.empty, pieces.empty, moveFlagEnPas ) );
+					addEnPassantMove( moveShift(sq, sq+9, pieces.empty, pieces.empty, moveFlagEnPas ) );
 				}
 				
 				if(sq + 11 === gameBoard.enPas) {
-					addEnPassantMove( moveShiftShift(sq, sq+11, pieces.empty, pieces.empty, moveFlagEnPas ) );
+					addEnPassantMove( moveShift(sq, sq+11, pieces.empty, pieces.empty, moveFlagEnPas ) );
 				}
 			}			
 			
@@ -154,7 +154,7 @@ function generateMoves() {
 		if(gameBoard.castlePerm & castleBit.WKCA) {			
 			if(gameBoard.pieces[squares.F1] === pieces.empty && gameBoard.pieces[squares.G1] === pieces.empty) {
 				if(squareAttacked(squares.F1, colours.black) === false && squareAttacked(squares.E1, colours.black) === false) {
-					addQuietMove( moveShiftShift(squares.E1, squares.G1, pieces.empty, pieces.empty, moveFlagCastle ));
+					addQuietMove( moveShift(squares.E1, squares.G1, pieces.empty, pieces.empty, moveFlagCastle ));
 				}
 			}
 		}
@@ -162,7 +162,7 @@ function generateMoves() {
 		if(gameBoard.castlePerm & castleBit.WQCA) {
 			if(gameBoard.pieces[squares.D1] === pieces.empty && gameBoard.pieces[squares.C1] === pieces.empty && gameBoard.pieces[squares.B1] === pieces.empty) {
 				if(squareAttacked(squares.D1, colours.black) === false && squareAttacked(squares.E1, colours.black) === false) {
-					addQuietMove( moveShiftShift(squares.E1, squares.C1, pieces.empty, pieces.empty, moveFlagCastle ));
+					addQuietMove( moveShift(squares.E1, squares.C1, pieces.empty, pieces.empty, moveFlagCastle ));
 				}
 			}
 		}		
@@ -175,7 +175,7 @@ function generateMoves() {
 			if(gameBoard.pieces[sq - 10] === pieces.empty) {
 				addBlackPawnQuietMove(sq, sq-10);		
 				if(ranksBoard[sq] === ranks.rank7 && gameBoard.pieces[sq - 20] === pieces.empty) {
-					addQuietMove( moveShiftShift(sq, sq - 20, pieces.empty, pieces.empty, moveFlagPawnStart ));
+					addQuietMove( moveShift(sq, sq - 20, pieces.empty, pieces.empty, moveFlagPawnStart ));
 				}
 			}
 			
@@ -189,18 +189,18 @@ function generateMoves() {
 			
 			if(gameBoard.enPas !== squares.noSquare) {
 				if(sq - 9 === gameBoard.enPas) {
-					addEnPassantMove( moveShiftShift(sq, sq-9, pieces.empty, pieces.empty, moveFlagEnPas ) );
+					addEnPassantMove( moveShift(sq, sq-9, pieces.empty, pieces.empty, moveFlagEnPas ) );
 				}
 				
 				if(sq - 11 === gameBoard.enPas) {
-					addEnPassantMove( moveShiftShift(sq, sq-11, pieces.empty, pieces.empty, moveFlagEnPas ) );
+					addEnPassantMove( moveShift(sq, sq-11, pieces.empty, pieces.empty, moveFlagEnPas ) );
 				}
 			}
 		}
 		if(gameBoard.castlePerm & castleBit.BKCA) {	
 			if(gameBoard.pieces[squares.F8] === pieces.empty && gameBoard.pieces[squares.G8] === pieces.empty) {
 				if(squareAttacked(squares.F8, colours.white) === false && squareAttacked(squares.E8, colours.white) === false) {
-					addQuietMove( moveShiftShift(squares.E8, squares.G8, pieces.empty, pieces.empty, moveFlagCastle ));
+					addQuietMove( moveShift(squares.E8, squares.G8, pieces.empty, pieces.empty, moveFlagCastle ));
 				}
 			}
 		}
@@ -208,7 +208,7 @@ function generateMoves() {
 		if(gameBoard.castlePerm & castleBit.BQCA) {
 			if(gameBoard.pieces[squares.D8] === pieces.empty && gameBoard.pieces[squares.C8] === pieces.empty && gameBoard.pieces[squares.B8] === pieces.empty) {
 				if(squareAttacked(squares.D8, colours.white) === false && squareAttacked(squares.E8, colours.white) === false) {
-					addQuietMove(moveShiftShift(squares.E8, squares.C8, pieces.empty, pieces.empty, moveFlagCastle));
+					addQuietMove(moveShift(squares.E8, squares.C8, pieces.empty, pieces.empty, moveFlagCastle));
 				}
 			}
 		}	
@@ -231,10 +231,10 @@ function generateMoves() {
 				
 				if(gameBoard.pieces[tSquare] !== pieces.empty) {
 					if(pieceColor[gameBoard.pieces[tSquare]] !== gameBoard.side) {
-						addCaptureMove( moveShiftShift(sq, tSquare, gameBoard.pieces[tSquare], pieces.empty, 0 ));
+						addCaptureMove( moveShift(sq, tSquare, gameBoard.pieces[tSquare], pieces.empty, 0 ));
 					}
 				} else {
-					addQuietMove( moveShiftShift(sq, tSquare, pieces.empty, pieces.empty, 0 ));
+					addQuietMove( moveShift(sq, tSquare, pieces.empty, pieces.empty, 0 ));
 				}
 			}			
 		}	
@@ -256,11 +256,11 @@ function generateMoves() {
 				
 					if(gameBoard.pieces[tSquare] !== pieces.empty) {
 						if(pieceColor[gameBoard.pieces[tSquare]] !== gameBoard.side) {
-							addCaptureMove( moveShiftShift(sq, tSquare, gameBoard.pieces[tSquare], pieces.empty, 0 ));
+							addCaptureMove( moveShift(sq, tSquare, gameBoard.pieces[tSquare], pieces.empty, 0 ));
 						}
 						break;
 					}
-					addQuietMove( moveShiftShift(sq, tSquare, pieces.empty, pieces.empty, 0 ));
+					addQuietMove( moveShift(sq, tSquare, pieces.empty, pieces.empty, 0 ));
 					tSquare += dir;
 				}
 			}			
@@ -296,11 +296,11 @@ function generateCaptures() {
 			
 			if(gameBoard.enPas !== squares.noSquare) {
 				if(sq + 9 === gameBoard.enPas) {
-					addEnPassantMove( moveShiftShift(sq, sq+9, pieces.empty, pieces.empty, moveFlagEnPas ) );
+					addEnPassantMove( moveShift(sq, sq+9, pieces.empty, pieces.empty, moveFlagEnPas ) );
 				}
 				
 				if(sq + 11 === gameBoard.enPas) {
-					addEnPassantMove( moveShiftShift(sq, sq+11, pieces.empty, pieces.empty, moveFlagEnPas ) );
+					addEnPassantMove( moveShift(sq, sq+11, pieces.empty, pieces.empty, moveFlagEnPas ) );
 				}
 			}			
 			
@@ -322,11 +322,11 @@ function generateCaptures() {
 			
 			if(gameBoard.enPas !== squares.noSquare) {
 				if(sq - 9 === gameBoard.enPas) {
-					addEnPassantMove( moveShiftShift(sq, sq-9, pieces.empty, pieces.empty, moveFlagEnPas ) );
+					addEnPassantMove( moveShift(sq, sq-9, pieces.empty, pieces.empty, moveFlagEnPas ) );
 				}
 				
 				if(sq - 11 === gameBoard.enPas) {
-					addEnPassantMove( moveShiftShift(sq, sq-11, pieces.empty, pieces.empty, moveFlagEnPas ) );
+					addEnPassantMove( moveShift(sq, sq-11, pieces.empty, pieces.empty, moveFlagEnPas ) );
 				}
 			}
 		}			
@@ -349,7 +349,7 @@ function generateCaptures() {
 				
 				if(gameBoard.pieces[tSquare] !== pieces.empty) {
 					if(pieceColor[gameBoard.pieces[tSquare]] !== gameBoard.side) {
-						addCaptureMove( moveShiftShift(sq, tSquare, gameBoard.pieces[tSquare], pieces.empty, 0 ));
+						addCaptureMove( moveShift(sq, tSquare, gameBoard.pieces[tSquare], pieces.empty, 0 ));
 					}
 				}
 			}			
@@ -372,7 +372,7 @@ function generateCaptures() {
 				
 					if(gameBoard.pieces[tSquare] !== pieces.empty) {
 						if(pieceColor[gameBoard.pieces[tSquare]] !== gameBoard.side) {
-							addCaptureMove( moveShiftShift(sq, tSquare, gameBoard.pieces[tSquare], pieces.empty, 0 ));
+							addCaptureMove( moveShift(sq, tSquare, gameBoard.pieces[tSquare], pieces.empty, 0 ));
 						}
 						break;
 					}
