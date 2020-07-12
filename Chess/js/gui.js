@@ -265,14 +265,14 @@ function checkResult() {
 	
 	if(InCheck === true) {
 		if(gameBoard.side === colours.white) {
-	      $("#gameStatus").text("GAME OVER {black mates}");
+	      $("#gameStatus").text("GAME OVER: Black Wins");
 	      return true;
         } else {
-	      $("#gameStatus").text("GAME OVER {white mates}");
+	      $("#gameStatus").text("GAME OVER: White wins");
 	      return true;
         }
 	} else {
-		$("#gameStatus").text("GAME DRAWN {stalemate}");return true;
+		$("#gameStatus").text("GAME DRAWN: Stalemate");return true;
 	}	
 }
 

@@ -89,18 +89,16 @@ function initBoardVars() {
 }
 
 function initBoardSquares() {
-	let lightSquare = 0;
+	let lightSquare = 1;
 	let rankName;
 	let fileName;
 	let divString;
-	let lastLight = 0;
 	let rankIter = 0;
 	let fileIter = 0;
 	let lightString;
 	
 	for(rankIter = ranks.rank8; rankIter >= ranks.rank1; rankIter--) {
-		lightSquare = lastLight ^ 1;
-		lastLight ^= 1;
+		lightSquare ^= 1;
 		rankName = "rank" + (rankIter+1);
 		for(fileIter = files.fileA; fileIter <= files.fileH; fileIter++) {
 			fileName = "file" + (fileIter+1);
