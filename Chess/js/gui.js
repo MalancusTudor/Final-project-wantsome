@@ -1,6 +1,7 @@
 $("#setFen").click(function () {
 	let fenStr = $("#fenInput").val();	
 	newGame(fenStr);
+	perftTest(5);
 });
 
 $('#takeButton').click( function () {
@@ -248,12 +249,12 @@ function checkResult() {
     
     generateMoves();
       
-    let MoveNum = 0;
+    let moveNum = 0;
 	let found = 0;
 	
-	for(MoveNum = gameBoard.moveListStart[gameBoard.ply]; MoveNum < gameBoard.moveListStart[gameBoard.ply + 1]; ++MoveNum)  {	
+	for(moveNum = gameBoard.moveListStart[gameBoard.ply]; moveNum < gameBoard.moveListStart[gameBoard.ply + 1]; ++moveNum)  {	
        
-        if ( makeMove(gameBoard.moveList[MoveNum]) === false)  {
+        if ( makeMove(gameBoard.moveList[moveNum]) === false)  {
             continue;
         }
         found++;

@@ -63,7 +63,7 @@ function isRepetition() {
 
 function quiescence(alpha, beta) {
 
-	if ((searchController.nodes & 2047) === 0) {
+	if ((searchController.nodes % 2048) === 0) {
 		checkUp();
 	}
 	
@@ -141,7 +141,7 @@ function alphaBeta(alpha, beta, depth) {
 		return quiescence(alpha, beta);
 	}
 	
-	if ((searchController.nodes & 2047) === 0) {
+	if ((searchController.nodes % 2048) === 0) {
 		checkUp();
 	}
 	
@@ -238,7 +238,6 @@ function alphaBeta(alpha, beta, depth) {
 function clearForSearch() {
 
 	let index = 0;
-	let index2 = 0;
 	
 	for(index = 0; index < 14 * boardSquareNumber; ++index) {				
 		gameBoard.searchHistory[index] = 0;	
@@ -302,9 +301,9 @@ function searchPosition() {
 
 function updateDOMStats(domScore, domDepth) {
 
-	let scoreText = "score: " + (domScore / 100).toFixed(2);
+	let scoreText = "Score: " + (domScore / 100).toFixed(2);
 	if(Math.abs(domScore) > mate - maxDepth) {
-		scoreText = "score: Mate In " + (mate - (Math.abs(domScore))-1) + " moves";
+		scoreText = "Score: Mate In " + (mate - (Math.abs(domScore))-1) + " moves";
 	}
 
 	let square = fromSquare(searchController.best);
