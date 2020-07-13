@@ -119,17 +119,6 @@ const castlePerm = [
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15
 ];
 
-/*	
-0000 0000 0000 0000 0000 0111 1111 -> From 0x7F
-0000 0000 0000 0011 1111 1000 0000 -> To >> 7, 0x7F
-0000 0000 0011 1100 0000 0000 0000 -> Captured >> 14, 0xF
-0000 0000 0100 0000 0000 0000 0000 -> EP 0x40000
-0000 0000 1000 0000 0000 0000 0000 -> Pawn Start 0x80000
-0000 1111 0000 0000 0000 0000 0000 -> Promoted piece >> 20, 0xF
-0001 0000 0000 0000 0000 0000 0000 -> Castle 0x1000000
-*/
-
-
 function fromSquare(move) { return (move & 0x7F); }
 function toSquare(move) { return ( (move >> 7) & 0x7F); }
 function capturedSquare(move) { return ( (move >> 14) & 0xF); }
@@ -165,43 +154,3 @@ gameController.gameOver = false;
 const userMove = {};
 userMove.from = squares.noSquare;
 userMove.to = squares.noSquare;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -8,8 +8,8 @@ gameBoard.history = [];
 gameBoard.ply = 0;
 gameBoard.enPas = 0;
 gameBoard.castlePerm = 0;
-gameBoard.material = new Array(2); // white,black material of pieces
-gameBoard.pieceNumber = new Array(13); // indexed by Pce
+gameBoard.material = new Array(2);
+gameBoard.pieceNumber = new Array(13);
 gameBoard.pieceList = new Array(14 * 10);
 gameBoard.positionKey = 0;
 gameBoard.moveList = new Array(maxDepth * maxPositionMoves);
@@ -372,72 +372,3 @@ function squareAttacked(sq, side) {
 	
 	return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
