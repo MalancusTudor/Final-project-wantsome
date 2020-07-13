@@ -198,7 +198,6 @@ function resetBoard() {
 	
 }
 
-//rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 
 function parseFen(fen) {
 
@@ -210,7 +209,7 @@ function parseFen(fen) {
     let count = 0;
     let i = 0;  
 	let sq120 = 0;
-	let fenCnt = 0; // fen[fenCnt]
+	let fenCnt = 0;
 	
 	while ((rank >= ranks.rank1) && fenCnt < fen.length) {
 	    count = 1;
@@ -258,9 +257,8 @@ function parseFen(fen) {
 			file++;
         }
 		fenCnt++;
-	} // while loop end
+	}
 	
-	//rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 	gameBoard.side = (fen[fenCnt] === 'w') ? colours.white : colours.black;
 	fenCnt += 2;
 	
