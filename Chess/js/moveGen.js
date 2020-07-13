@@ -56,7 +56,7 @@ function addQuietMove(move) {
 			gameBoard.searchHistory[gameBoard.pieces[fromSquare(move)] * boardSquareNumber + toSquare(move)];
 	}
 	
-	gameBoard.moveListStart[gameBoard.ply+1]++
+	gameBoard.moveListStart[gameBoard.ply+1]++;
 }
 
 function addEnPassantMove(move) {

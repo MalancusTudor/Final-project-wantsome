@@ -1,7 +1,7 @@
 $("#setFen").click(function () {
 	let fenStr = $("#fenInput").val();	
 	newGame(fenStr);
-	perftTest(5);
+	// perftTest(5);
 });
 
 $('#takeButton').click( function () {
