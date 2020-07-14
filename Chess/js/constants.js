@@ -127,9 +127,7 @@ function promotedSquare(move) { return ( (move >> 20) & 0xF); }
 const moveFlagEnPas = 0x40000;
 const moveFlagPawnStart = 0x80000;
 const moveFlagCastle = 0x1000000;
-
 const moveFlagCapture = 0x7C000;
-const moveFlagPromotion = 0xF00000;
 
 const noMove = 0;
 
