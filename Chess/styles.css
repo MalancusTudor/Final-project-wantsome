@@ -119,3 +119,21 @@ button:hover {
     width: 90px;
     height: 90px;
 }
+
+.rank1::after { content: '1'; }
+.rank2::after { content: '2'; }
+.rank3::after { content: '3'; }
+.rank4::after { content: '4'; }
+.rank5::after { content: '5'; }
+.rank6::after { content: '6'; }
+.rank7::after { content: '7'; }
+.rank8::after { content: '8'; }
+
+.file1::before { content: 'A'; }
+.file2::before { content: 'B'; }
+.file3::before { content: 'C'; }
+.file4::before { content: 'D'; }
+.file5::before { content: 'E'; }
+.file6::before { content: 'F'; }
+.file7::before { content: 'G'; }
+.file8::before { content: 'H'; }

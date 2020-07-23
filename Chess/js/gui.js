@@ -12,6 +12,12 @@ $('#takeButton').click( function () {
 		setInitialBoardPieces();
 		gameController.gameOver = false;
 	}
+	$("#orderingOutput").text("Ordering:");
+	$("#depthOutput").text("Depth:");
+	$("#scoreOutput").text("Score:");
+	$("#nodesOutput").text("Nodes:");
+	$("#timeOutput").text("Time:");
+	$("#bestOutput").text("Best move:");
 });
 
 $('#newGameButton').click( function () {
@@ -23,6 +29,12 @@ function newGame(fenStr) {
 	printBoard();
 	setInitialBoardPieces();
 	checkAndSet();
+	$("#orderingOutput").text("Ordering:");
+	$("#depthOutput").text("Depth:");
+	$("#scoreOutput").text("Score:");
+	$("#nodesOutput").text("Nodes:");
+	$("#timeOutput").text("Time:");
+	$("#bestOutput").text("Best move:");
 }
 
 function clearAllPieces() {
