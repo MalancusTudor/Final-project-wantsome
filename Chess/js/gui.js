@@ -103,10 +103,6 @@ $(document).on('click','.piece', function (e) {
 	if(userMove.from === squares.noSquare) {
 		userMove.from = clickedSquare(e.pageX, e.pageY);
 		for(let i = gameBoard.moveListStart[gameBoard.ply]; i < gameBoard.moveListStart[gameBoard.ply + 1]; ++i) {
-			if(makeMove(gameBoard.moveList[i]) === false) {
-				continue;
-			}
-			takeMove();
 			if(userMove.from === fromSquare(gameBoard.moveList[i])) {
 				setSquareSelected(toSquare(gameBoard.moveList[i]));
 			}

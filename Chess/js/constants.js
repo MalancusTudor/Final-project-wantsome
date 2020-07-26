@@ -29,7 +29,7 @@ const pvEntries = 10000;
 const filesBoard = new Array(boardSquareNumber);
 const ranksBoard = new Array(boardSquareNumber);
 
-const startFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+const startFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -";
 
 const pieceChar = ".PNBRQKpnbrqk";
 const sideChar = "wb-";
