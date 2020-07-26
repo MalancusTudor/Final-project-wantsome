@@ -18,10 +18,12 @@ $('#takeButton').click( function () {
 	$("#nodesOutput").text("Nodes:");
 	$("#timeOutput").text("Time:");
 	$("#bestOutput").text("Best move:");
+	$("#fiftyMove").text("Fifty move: ");
 });
 
 $('#newGameButton').click( function () {
 	newGame(startFEN);
+	$("#fenInput").val(startFEN);
 });
 
 function newGame(fenStr) {
@@ -35,6 +37,7 @@ function newGame(fenStr) {
 	$("#nodesOutput").text("Nodes:");
 	$("#timeOutput").text("Time:");
 	$("#bestOutput").text("Best move:");
+	$("#fiftyMove").text("Fifty move: ");
 }
 
 function clearAllPieces() {
@@ -109,10 +112,8 @@ $(document).on('click','.piece', function (e) {
 		}
 	} else {
 		userMove.to = clickedSquare(e.pageX, e.pageY);
+		makeUserMove();
 	}
-	
-	makeUserMove();
-	
 });
 
 $(document).on('click','.square', function (e) {
@@ -126,33 +127,44 @@ $(document).on('click','.square', function (e) {
 
 function makeUserMove() {
 
-	if(userMove.from !== squares.noSquare && userMove.to !== squares.noSquare) {
+	if(gameController.gameOver === false) {
+		if(userMove.from !== squares.noSquare && userMove.to !== squares.noSquare) {
 	
-		console.log("User Move:" + printSquare(userMove.from) + printSquare(userMove.to));	
-		
-		let parsed = parseMove(userMove.from,userMove.to);
-		
+			console.log("User Move:" + printSquare(userMove.from) + printSquare(userMove.to));	
+			
+			let parsed = parseMove(userMove.from,userMove.to);
+			
+			for(let i = gameBoard.moveListStart[gameBoard.ply]; i < gameBoard.moveListStart[gameBoard.ply + 1]; ++i) {
+				if(userMove.from === fromSquare(gameBoard.moveList[i])) {
+					deselectSquare(toSquare(gameBoard.moveList[i]));
+				}
+			}
+	
+			if(parsed !== noMove) {
+				makeMove(parsed);
+				printBoard();
+				moveGUIPiece(parsed);
+				checkAndSet();
+				preSearch();
+			}
+	
+			deselectSquare(userMove.from);
+			deselectSquare(userMove.to);
+			
+			userMove.from = squares.noSquare;
+			userMove.to = squares.noSquare;
+			$("#fiftyMove").text("Fifty move: " + gameBoard.fiftyMove);
+		}
+	} else {
 		for(let i = gameBoard.moveListStart[gameBoard.ply]; i < gameBoard.moveListStart[gameBoard.ply + 1]; ++i) {
 			if(userMove.from === fromSquare(gameBoard.moveList[i])) {
 				deselectSquare(toSquare(gameBoard.moveList[i]));
 			}
 		}
 
-		if(parsed !== noMove) {
-			makeMove(parsed);
-			printBoard();
-			moveGUIPiece(parsed);
-			checkAndSet();
-			preSearch();
-		}
-
 		deselectSquare(userMove.from);
 		deselectSquare(userMove.to);
-		
-		userMove.from = squares.noSquare;
-		userMove.to = squares.noSquare;
 	}
-
 }
 
 function pieceIsOnSquare(sq, top, left) {
@@ -256,7 +268,7 @@ function threeFoldRep() {
 }
 
 function checkResult() {
-	if(gameBoard.fiftyMove >= 100) {
+	if(gameBoard.fiftyMove > 99) {
 		 $("#gameStatus").text("GAME DRAWN {fifty move rule}"); 
 		 return true;
 	}
@@ -299,7 +311,8 @@ function checkResult() {
 	      return true;
         }
 	} else {
-		$("#gameStatus").text("GAME DRAWN: Stalemate");return true;
+		$("#gameStatus").text("GAME DRAWN: Stalemate");
+		return true;
 	}	
 }
 
@@ -334,4 +347,5 @@ function startSearch() {
 	makeMove(searchController.best);
 	moveGUIPiece(searchController.best);
 	checkAndSet();
+	$("#fiftyMove").text("Fifty move: " + gameBoard.fiftyMove);
 }
