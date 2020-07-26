@@ -309,7 +309,6 @@ function updateDOMStats(domScore, domDepth) {
 	let square = fromSquare(searchController.best);
 	let piece = gameBoard.pieces[square]
 	
-	$("#orderingOutput").text("Ordering: " + ((searchController.fhf/searchController.fh)*100).toFixed(2) + "%");
 	$("#depthOutput").text("Depth: " + domDepth);
 	$("#scoreOutput").text(scoreText);
 	$("#nodesOutput").text("Nodes: " + searchController.nodes);

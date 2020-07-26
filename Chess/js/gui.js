@@ -86,6 +86,7 @@ function clickedSquare(pageX, pageY) {
 	
 	let file = Math.floor((pageX-workedX) / 90);
 	let rank = 7 - Math.floor((pageY-workedY) / 90);
+	console.log('clickedSquare() at ' + rank + ',' + file);
 	
 	let sq = fileRankToSquare(file,rank);
 	
@@ -101,6 +102,11 @@ $(document).on('click','.piece', function (e) {
 	
 	if(userMove.from === squares.noSquare) {
 		userMove.from = clickedSquare(e.pageX, e.pageY);
+		for(let i = gameBoard.moveListStart[gameBoard.ply]; i < gameBoard.moveListStart[gameBoard.ply + 1]; ++i) {
+			if(userMove.from === fromSquare(gameBoard.moveList[i])) {
+				setSquareSelected(toSquare(gameBoard.moveList[i]));
+			}
+		}
 	} else {
 		userMove.to = clickedSquare(e.pageX, e.pageY);
 	}
@@ -126,6 +132,12 @@ function makeUserMove() {
 		
 		let parsed = parseMove(userMove.from,userMove.to);
 		
+		for(let i = gameBoard.moveListStart[gameBoard.ply]; i < gameBoard.moveListStart[gameBoard.ply + 1]; ++i) {
+			if(userMove.from === fromSquare(gameBoard.moveList[i])) {
+				deselectSquare(toSquare(gameBoard.moveList[i]));
+			}
+		}
+
 		if(parsed !== noMove) {
 			makeMove(parsed);
 			printBoard();
@@ -133,7 +145,7 @@ function makeUserMove() {
 			checkAndSet();
 			preSearch();
 		}
-	
+
 		deselectSquare(userMove.from);
 		deselectSquare(userMove.to);
 		
@@ -313,12 +325,10 @@ $('#searchButton').click( function () {
 });
 
 function startSearch() {
-
 	searchController.depth = maxDepth;
-	let t = $.now();
-	let tt = $('#thinkTime').val();
+	let t = $('#thinkTime').val();
 	
-	searchController.time = parseInt(tt) * 1000;
+	searchController.time = parseInt(t) * 1000;
 	searchPosition();
 	
 	makeMove(searchController.best);
