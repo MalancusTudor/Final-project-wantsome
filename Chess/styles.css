@@ -94,7 +94,7 @@ button:hover {
 
 .squareSelected {
     background-color: #94816e;
-    border: 2px solid yellow;
+    border: 1px solid yellow;
 }
 
 .rank1 { top: 630px; }
