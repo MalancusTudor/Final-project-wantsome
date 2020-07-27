@@ -269,17 +269,17 @@ function threeFoldRep() {
 
 function checkResult() {
 	if(gameBoard.fiftyMove > 99) {
-		 $("#gameStatus").text("GAME DRAWN {fifty move rule}"); 
+		 $("#gameStatus").text("GAME DRAWN: Fifty move rule"); 
 		 return true;
 	}
 	
 	if (threeFoldRep() >= 2) {
-     	$("#gameStatus").text("GAME DRAWN {3-fold repetition}"); 
+     	$("#gameStatus").text("GAME DRAWN: 3-fold repetition"); 
      	return true;
     }
 	
 	if (drawMaterial() === true) {
-     	$("#gameStatus").text("GAME DRAWN {insufficient material to mate}"); 
+     	$("#gameStatus").text("GAME DRAWN: Insufficient material to mate"); 
      	return true;
     }
     
